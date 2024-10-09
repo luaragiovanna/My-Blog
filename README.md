@@ -9,8 +9,7 @@
     phpMyAdmin.
 </p>
 
-<p>This blog was based on 'Laravel 8 from Scratch'. </br>
-Take a look 👁️ 👁️ : </p>
-![Home page](img1.png)
+<p>This blog was based on 'Laravel 8 from Scratch'.
+ </p>
 
 
