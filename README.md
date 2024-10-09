@@ -1,10 +1,16 @@
-<h1>My Blog</h1>
+<h1 style="font-weight: bold;">My Bloog 💻</h1>
 
-<p>I built this blog using PHP, Laravel, and phpMyAdmin.</p>
+<p> I built this blog using 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="PHP" width="20" height="20"/>
+    PHP, 
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel" width="20" height="20"/>
+    Laravel, and 
+    <img src="https://www.phpmyadmin.net/static/images/logo-og.png" alt="phpMyAdmin" width="20" height="20"/>
+    phpMyAdmin.
+</p>
 
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="PHP" width="40" height="40"/>
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-plain.svg" alt="Laravel" width="40" height="40"/>
-<img src="https://www.phpmyadmin.net/static/images/logo-og.png" alt="phpMyAdmin" width="40" height="40"/>
+<p>This blog was based on 'Laravel 8 from Scratch'. </br>
+Take a look 👁️ 👁️ : </p>
+![Home page](img1.png)
 
-<p>This blog is based on 'Laravel 8 From Scratch' by Jeffrey Way.</p>
 
