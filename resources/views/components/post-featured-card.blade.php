@@ -5,15 +5,14 @@ class="transition-colors duration-300 hover:bg-gray-100 border border-black bord
 <div class="py-6 px-5 lg:flex">
     <div class="flex-1 lg:mr-8">
              {{--TODO--}}
-        <img src=".{{asset('storage/'. $post->thumnail)}}" alt="Blog Post illustration" class="rounded-xl">
+             <img src="{{asset('/storage/'. $post->thumbnail)}}" alt="Blog Post illustration" class="rounded-xl">
     </div>
 
     <div class="flex-1 flex flex-col justify-between">
         <header class="mt-8 lg:mt-0">
             <div class="space-x-2">
-                <a href="/categories/{{$post->category->slug}}"
-                   class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                   style="font-size: 10px">{{$post->category->name}}</a>
+               
+                   <x-category-button :category="$post->category"></x-category-button>
 
               
             </div>
@@ -40,7 +39,7 @@ class="transition-colors duration-300 hover:bg-gray-100 border border-black bord
 
         <footer class="flex justify-between items-center mt-8">
             <div class="flex items-center text-sm">
-                <img src="./images/lary-avatar.svg" alt="Lary avatar">
+         
                 <div class="ml-3">
                     <h5 class="font-bold">
                         <a href="/authors/{{$post->author->username}}">

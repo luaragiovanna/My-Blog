@@ -25,18 +25,21 @@
 <body style="font-family: Open Sans, sans-serif">
     <section class="px-6 py-8">
         <nav class="md:flex md:justify-between md:items-center">
-
-            <img src="/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
-
+            <h1 class="text-4xl">
+                <a href="/"><img src="/images/logo.svg" alt="Laracasts Logo" width="165" height="16"></a>
+            </h1>
+            
             <div class="mt-8 md:mt-0 flex items-center">
                 @auth
                 <x-dropdown>
                     <x-slot name="trigger">
                         <button class="text-xs font-bold uppercase"> Welcome,  {{ auth()->user()->name }}!</button>
                     </x-slot>
+                    @if (auth()->user()->can('admin'))
 
                     <x-dropdown-item href="/admin/posts/create" :active="request()->routeIs('admin/posts/create')">New Post</x-dropdown-item>
-                    <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
+                    <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">Dashboard</x-dropdown-item>
+                    @endif
                     <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
 
                     <form id="logout-form" method="POST" action="/logout" class="hidden">

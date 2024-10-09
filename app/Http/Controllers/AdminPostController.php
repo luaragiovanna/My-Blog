@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Models\Post;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -22,11 +21,10 @@ class AdminPostController extends Controller
  
      public function store(){
         //dd(request()->all());
- 
-        $path = request()->file('thumbnail')->store('thumbnails');
+        //$path = request()->file('thumbnail')->store('thumbnails');
         $attributes = request()->validate([
          'title' => 'required',
-         'thumbnail' => 'required | image',
+         'thumbnail' => ' image',
          'slug' => ['required', Rule::unique('posts', 'slug')],//slug n pode ja existir
          'body' => 'required',
          'category_id' => ['required', Rule::exists('categories', 'id')]
@@ -38,6 +36,31 @@ class AdminPostController extends Controller
         return redirect('/');
      }
      public function edit(Post $post){
-        return view('admin.posts.edit');
+       
+        return view('admin.posts.edit', ['post' => $post]);
+    }
+    
+
+     public function update(Post $post){
+        $attributes = request()->validate([
+            'title' => 'required',
+            'thumbnail' => $post -> exists ? ['image'] :['required'|'image'],
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],//slug n pode ja existir
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')]
+           ]);     
+
+           if(isset($attributes['thumbnail'])){
+            $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+           }
+           //se tem thumbnail, tem q guardar
+           $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+           $post->update($attributes);
+           return back()->with('success', 'Post Update');
+     }
+
+     public function destroy(Post $post){
+        $post->delete();
+        return back()->with('success', 'Post Deleted');
      }
 }

@@ -5,11 +5,9 @@ use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-use App\Http\Middleware\EnsureTokenIsValid;
-use App\Http\Middleware\MustBeAdministrator;
-use App\Http\Models\Post\AdminPostController;
-use App\Models\Category;
-use GuzzleHttp\Middleware;
+
+use App\Http\Controllers\AdminPostController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -35,8 +33,19 @@ Route::post('posts/{post:slug}/comments',[PostCommentsController::class, 'store'
  Route::post('newsletter', NewsletterController::class);
 
 
-Route::get('admin/posts/create', [AdminPostController::class, 'create'])->middleware('auth');
-//Route::get('/admin/posts/create',function(){} [PostController::class, 'admin']);
-Route::get('admin/posts', [AdminPostController::class, 'index'])->middleware('auth');
-Route::post('admin/posts', [AdminPostController::class, 'store'])->middleware('auth');
-Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
+ //group 
+ Route::middleware('can:admin')->group(function(){
+    Route::resource('admin/posts', AdminPostController::class)->except('show');
+    //Route::patch('admin/posts/{post}edit', [AdminPostController::class, 'update']);
+    /*Route::get('admin/posts/create', [AdminPostController::class, 'create']);
+    Route::get('admin/posts', [AdminPostController::class, 'index']);
+    Route::post('admin/posts', [AdminPostController::class, 'store']);
+    Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
+    
+    Route::delete('admin/posts/{post}', [AdminPostController::class, 'delete']);*/
+ });
+
+
+ Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
+ Route::delete('admin/posts/{post}', [AdminPostController::class, 'delete'])->middleware('can:admin');
+

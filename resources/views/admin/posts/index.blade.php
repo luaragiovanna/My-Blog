@@ -19,10 +19,11 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <a href="/admin/posts/{{ $post->id }}/edit" class="text-blue-500 hover:text-blue-600">Edit</a>
+                                            <a href="/admin/posts/{{$post-> id}}/edit" class="text-blue-500 hover:text-blue-600">Edit</a>
+
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <td class="text-red-300 hover:text-red-400 px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <form method="POST" action="/admin/posts/{{ $post->id }}">
                                                 @csrf
                                                 @method('DELETE')
